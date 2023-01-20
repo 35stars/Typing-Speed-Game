@@ -1,0 +1,88 @@
+*{
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+body{
+    background-color: rgba(4, 10, 42, 0.8)
+}
+
+h2{
+    letter-spacing: .2ch;
+    font-size: 2.5rem;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: aliceblue;
+    text-shadow: 1px 2px 3px rgb(9, 9, 9);
+}    
+
+#wrapper{
+    margin: 5rem auto;
+    width: max-content;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#inputs-div{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    border-radius: .5rem;
+    margin: .5rem;
+    background-color: rgba(213, 213, 213, 0.2);
+}
+
+input[type='text']{
+    height: 100%;
+    width: 70%;
+    padding: .5rem;
+    font-size: large;
+    margin-right: .2rem;
+}
+input[type='button']{
+    cursor: pointer;
+    width: 30%;
+    font-size: 1.2rem;
+}
+
+.timer{
+    margin: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 300px;
+    color: aliceblue;
+    font-size: 2rem;
+    border: 1px dashed white;
+    padding: 1rem;
+    width: 100%;
+}
+
+#stats{
+    border-radius: .4rem;
+    color: aliceblue;
+    margin-top: 2rem;
+    font-size: 1.4rem;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;   
+    background-color: rgb(39, 39, 39); 
+    width: 100%;
+}
+
+#pop-up{
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    color: yellow
+}
+
+#game-over{
+    margin-top: 1rem;
+    color: yellow;
+    font-size: 1.4rem;
+}

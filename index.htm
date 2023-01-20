@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <section id="wrapper">
+        <h2></h2>
+
+        <div id="stats">
+            <p>High Score:&nbsp<span id="highScore">0</span> </p>
+        </div>    
+
+        <p id="pop-up"></p>
+        <div id="inputs-div">
+            <input type="text"> 
+            <input type="button" value="restart" id="btn">
+        </div>
+
+        <p id="game-over"></p>
+
+        <section class="timer score">
+            <div id="timer">Timer:<span id="counter"></span></div>
+            <div>Score:<span id="score">&nbsp0</span></div>
+        </section>
+    </section>
+
+    <script>
+        
+
+            let popUp = document.getElementById('pop-up')
+            let highScore = document.getElementById('highScore')
+            let prevScore = document.getElementById('prevScore')
+            let score = document.getElementById('score')
+            let restart = document.querySelector('#btn')
+            let word = document.querySelector('h2')
+            let inputEl = document.querySelector('input')
+            let counter = document.querySelector('#counter') 
+            let gameOver = document.querySelector('#game-over')
+
+            
+            inputEl.focus()
+
+            const words = ['wonderful', 'rendezvous', 'awesome','greatness','holiness','energetic','vigorous','creative','resilient','beautiful','admirable','delicious','pretty','funny','horrible','terrible','amazing','splendor','advantage','disadvantage','sophisticated','hilarious','sensible','humorous','fighter','laughter','wisdom','highest','toughest','wreckless','confidence','assurance','joyful','mournful','careful','ponder','hatred','blessings','colorful','strong','intimidating','feelings','quick','furious','faster','smarter','outsmart','plenty','surprise','fearless','fastest','quickest','largest','deepest','shortest','longest','caring','loving','forgiving','thinking','relaxing','enjoying','fasting','drinking','sleeping','breathing','eating','watching','running','swimming','cycling',]
+            
+            const interjections = ['Nice one!','Gotcha!','Keep going!','Keep it up!',`Awesome!`,`Amazing!`,`Yes!`,`Yes sir!`,'Yahoo!','Come and get me!']
+
+            let time = 5
+            let count = 0
+
+            let timer = (x,y) => {
+                if(time > 0){
+                    counter.textContent = ` ${--time}`
+                    gameOver.textContent = x
+                }else {
+                    clearInterval(timer)
+                    inputEl.setAttribute('disabled',true)
+                    gameOver.textContent = y
+                }
+            }
+     
+            function wordPop(wordPop){
+                let random = Math.floor(Math.random() * wordPop.length)
+                popUp.textContent = wordPop[random]
+            }
+
+            restart.onclick=()=>{
+                let sound = new Audio('switch-button-106349.mp3').play()
+                inputEl.removeAttribute('disabled')
+                startGame(words)
+                time = 5
+                score.textContent = ` ${0}`
+                inputEl.focus()
+                inputEl.value=''
+
+                if(score.textContent !== 0){
+                    count = 0
+                }
+            }    
+
+
+            function incrementScore(){
+                score.textContent = ` ${++count}` 
+            }
+
+            function decrementScore(){
+                if(score.textContent > 0){
+                    score.textContent = ` ${--count}`
+                } else score.textContent = ` ${0}` 
+            }
+
+            setInterval(timer, 1000,'...','Game over!');
+            startGame(words)
+            function startGame(){
+                
+                let random = Math.floor(Math.random() * words.length)
+                word.textContent = words[random]
+                
+                inputEl.onkeypress=()=>{
+                    
+                    if(inputEl.value == words[random] && event.keyCode == 13){
+                        
+                        let sound = new Audio('good-6081.mp3').play()
+
+                        if(score.textContent == 10){
+                            highScore.textContent = score.textContent
+                            let sound = new Audio('winfantasia-6912.mp3').play()
+                        }
+
+                        time = 5
+                        incrementScore()
+                        inputEl.value=''
+
+                        setTimeout(() => {
+                            popUp.textContent = ''
+                        }, 1000, wordPop(interjections))
+
+                        startGame(words);                            
+                    } else if(inputEl.value !== words[random] && event.keyCode == 13){
+
+                        let sound = new Audio('error-2-36058.mp3').play()
+
+                        setTimeout(() => {
+                            popUp.textContent = ''
+                        }, 1000, popUp.textContent = 'Badass!')
+
+                        decrementScore()
+                        /* if(score.textContent > 0){
+                            score.textContent = ` ${--count}`
+                        } else score.textContent = ` ${0}` */
+                    }
+                }     
+            }
+
+            
+
+
+         
+    </script>
+</body>
+</html>
